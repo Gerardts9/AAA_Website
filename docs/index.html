@@ -103,28 +103,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gtex-pipeline-for-aaa-rnaseq-analysis" id="toc-gtex-pipeline-for-aaa-rnaseq-analysis" class="nav-link active" data-scroll-target="#gtex-pipeline-for-aaa-rnaseq-analysis">GTEx Pipeline for AAA RNAseq Analysis</a></li>
+  <li><a href="#gtex-pipeline-for-aaa-rnaseq-analysis" id="toc-gtex-pipeline-for-aaa-rnaseq-analysis" class="nav-link active" data-scroll-target="#gtex-pipeline-for-aaa-rnaseq-analysis">GTEx Pipeline for AAA RNAseq Analysis</a>
+  <ul class="collapse">
   <li><a href="#install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere" id="toc-install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere" class="nav-link" data-scroll-target="#install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere">Install RNAseQC and samtools, then modify .bashrc file to make them callable from anywhere:</a></li>
   <li><a href="#add-to-homegerard.bashrc-file" id="toc-add-to-homegerard.bashrc-file" class="nav-link" data-scroll-target="#add-to-homegerard.bashrc-file">Add to /home/gerard/.bashrc file:</a></li>
   <li><a href="#in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps" id="toc-in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps" class="nav-link" data-scroll-target="#in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps">In R, create a list with the files that will be used in the pipeline steps:</a></li>
   <li><a href="#prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s" id="toc-prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s" class="nav-link" data-scroll-target="#prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s">Prepare array for the STAR step, where we need the name to include the “_S#“:</a></li>
   <li><a href="#now-prepare-array-for-the-other-steps-without-the-_s" id="toc-now-prepare-array-for-the-other-steps-without-the-_s" class="nav-link" data-scroll-target="#now-prepare-array-for-the-other-steps-without-the-_s">Now, prepare array for the other steps, without the “_S#“:</a></li>
   <li><a href="#to-set-the-array_star.txt-file-as-array-in-bash" id="toc-to-set-the-array_star.txt-file-as-array-in-bash" class="nav-link" data-scroll-target="#to-set-the-array_star.txt-file-as-array-in-bash">To set the Array_STAR.txt file as array in bash:</a></li>
-  <li><a href="#we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." id="toc-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." class="nav-link" data-scroll-target="#we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required.">We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.</a></li>
-  <li><a href="#bam-to-fastq-conversion" id="toc-bam-to-fastq-conversion" class="nav-link" data-scroll-target="#bam-to-fastq-conversion">BAM to FASTQ conversion</a></li>
-  <li><a href="#only-one-time-to-create-the-star-index" id="toc-only-one-time-to-create-the-star-index" class="nav-link" data-scroll-target="#only-one-time-to-create-the-star-index">Only one time, to create the STAR index:</a></li>
-  <li><a href="#build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149" id="toc-build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149" class="nav-link" data-scroll-target="#build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149">Build the STAR index, using the gencode version v26, and for reads of length 149:</a></li>
-  <li><a href="#only-one-time-to-create-the-rsem-index" id="toc-only-one-time-to-create-the-rsem-index" class="nav-link" data-scroll-target="#only-one-time-to-create-the-rsem-index">Only one time, to create the RSEM index:</a></li>
-  <li><a href="#build-the-rsem-index" id="toc-build-the-rsem-index" class="nav-link" data-scroll-target="#build-the-rsem-index">Build the RSEM index:</a></li>
+  <li><a href="#bam-to-fastq-conversion.-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." id="toc-bam-to-fastq-conversion.-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." class="nav-link" data-scroll-target="#bam-to-fastq-conversion.-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required.">BAM to FASTQ conversion. We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.</a></li>
+  <li><a href="#build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149.-only-one-time-to-create-the-star-index" id="toc-build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149.-only-one-time-to-create-the-star-index" class="nav-link" data-scroll-target="#build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149.-only-one-time-to-create-the-star-index">Build the STAR index, using the gencode version v26, and for reads of length 149. Only one time, to create the STAR index:</a></li>
+  <li><a href="#build-the-rsem-index.-only-one-time-to-create-the-rsem-index" id="toc-build-the-rsem-index.-only-one-time-to-create-the-rsem-index" class="nav-link" data-scroll-target="#build-the-rsem-index.-only-one-time-to-create-the-rsem-index">Build the RSEM index. Only one time, to create the RSEM index:</a></li>
   <li><a href="#star-alignment" id="toc-star-alignment" class="nav-link" data-scroll-target="#star-alignment">STAR alignment:</a></li>
   <li><a href="#to-set-the-array_others.txt-file-as-array-in-bash" id="toc-to-set-the-array_others.txt-file-as-array-in-bash" class="nav-link" data-scroll-target="#to-set-the-array_others.txt-file-as-array-in-bash">To set the Array_Others.txt file as array in bash:</a></li>
   <li><a href="#after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have" id="toc-after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have" class="nav-link" data-scroll-target="#after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have">After obtaining the SAM aligned files, we run RSeQC with one of them to identify the type of data we have:</a></li>
   <li><a href="#indicates-that-is-paired-end-stranded." id="toc-indicates-that-is-paired-end-stranded." class="nav-link" data-scroll-target="#indicates-that-is-paired-end-stranded.">Indicates that is paired-end STRANDED.</a></li>
   <li><a href="#sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done" id="toc-sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done" class="nav-link" data-scroll-target="#sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done">Sync BAMs (optional; copy QC flags and read group IDs): NOT DONE</a></li>
   <li><a href="#mark-duplicates-picard" id="toc-mark-duplicates-picard" class="nav-link" data-scroll-target="#mark-duplicates-picard">Mark duplicates (Picard):</a></li>
-  <li><a href="#rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly" id="toc-rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly" class="nav-link" data-scroll-target="#rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly">RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly,</a></li>
+  <li><a href="#rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly-with-the-same-options-as-in-the-gtex-pipeline.-the-options-that-increase-the-number-of-exonic-reads-are-rf-and-using-gencode.v26.grch38.ercc.genes.collapsed_only.gtf-as-gencode-reference.-i-start-creating-the-rf-folder-in-each-of-the-samples-folders" id="toc-rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly-with-the-same-options-as-in-the-gtex-pipeline.-the-options-that-increase-the-number-of-exonic-reads-are-rf-and-using-gencode.v26.grch38.ercc.genes.collapsed_only.gtf-as-gencode-reference.-i-start-creating-the-rf-folder-in-each-of-the-samples-folders" class="nav-link" data-scroll-target="#rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly-with-the-same-options-as-in-the-gtex-pipeline.-the-options-that-increase-the-number-of-exonic-reads-are-rf-and-using-gencode.v26.grch38.ercc.genes.collapsed_only.gtf-as-gencode-reference.-i-start-creating-the-rf-folder-in-each-of-the-samples-folders">RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly, with the same options as in the GTEx pipeline. The options that increase the number of exonic reads are: RF and using gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf as gencode reference. I start creating the RF folder in each of the samples folders</a></li>
   <li><a href="#rsem-transcript-quantification" id="toc-rsem-transcript-quantification" class="nav-link" data-scroll-target="#rsem-transcript-quantification">RSEM transcript quantification:</a></li>
   <li><a href="#sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py" id="toc-sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py" class="nav-link" data-scroll-target="#sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py">Sample-level outputs in GCT format can be concatenated using combine_GCTs.py:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -150,68 +149,40 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This is a Quarto website.</p>
 <p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<section id="section" class="level41">
-<p class="heading"></p>
-</section>
-<section id="gtex-pipeline-for-aaa-rnaseq-analysis" class="level1">
-<h1>GTEx Pipeline for AAA RNAseq Analysis</h1>
-<section id="section-1" class="level41">
-<p class="heading"></p>
-</section>
-</section>
-<section id="install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere" class="level1">
-<h1>Install RNAseQC and samtools, then modify .bashrc file to make them callable from anywhere:</h1>
-<section id="section-2" class="level167">
-<p class="heading"></p>
+<section id="gtex-pipeline-for-aaa-rnaseq-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="gtex-pipeline-for-aaa-rnaseq-analysis">GTEx Pipeline for AAA RNAseq Analysis</h2>
+<section id="install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere" class="level3">
+<h3 class="anchored" data-anchor-id="install-rnaseqc-and-samtools-then-modify-.bashrc-file-to-make-them-callable-from-anywhere">Install RNAseQC and samtools, then modify .bashrc file to make them callable from anywhere:</h3>
 <p>mkdir opt cd opt mkdir rnaseqc cd rnadeqc wget https://github.com/getzlab/rnaseqc/releases/download/v2.3.6/rnaseqc.v2.3.6.linux.gz gunzip rnaseqc.v2.3.6.linux.gz &amp;&amp; mv rnaseqc.v2.3.6.linux rnaseqc &amp;&amp; chmod 775 rnaseqc PATH=$PATH:/home/gerard/opt/rnaseqc pip3 install rnaseqc</p>
 </section>
+<section id="add-to-homegerard.bashrc-file" class="level3">
+<h3 class="anchored" data-anchor-id="add-to-homegerard.bashrc-file">Add to /home/gerard/.bashrc file:</h3>
+<p>export PATH=<span class="math inline">\(PATH:/home/gerard/samtools-1.16.1 export PATH=\)</span>PATH:/home/gerard/opt/rnaseqc</p>
 </section>
-<section id="add-to-homegerard.bashrc-file" class="level1">
-<h1>Add to /home/gerard/.bashrc file:</h1>
-<p>export PATH=<span class="math inline">\(PATH:/home/gerard/samtools-1.16.1 export PATH=\)</span>PATH:/home/gerard/opt/rnaseqc #######################################################################################################################################################################</p>
-</section>
-<section id="in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps" class="level1">
-<h1>In R, create a list with the files that will be used in the pipeline steps:</h1>
-<section id="section-3" class="level167">
-<p class="heading"></p>
+<section id="in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps" class="level3">
+<h3 class="anchored" data-anchor-id="in-r-create-a-list-with-the-files-that-will-be-used-in-the-pipeline-steps">In R, create a list with the files that will be used in the pipeline steps:</h3>
 <p>ff &lt;- list.files(path = “/home/datasets/aaa/AAA.d.RNAseq/FastQ”,pattern = “<em>R1_001.fastq.gz”, recursive = ”TRUE”, full.names = F) ff &lt;- gsub(”.</em>/”,““,ff) ff &lt;- sub(”^([^_]*_[^_]<em>).</em>”, “\1”, ff)</p>
 </section>
-</section>
-<section id="prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s" class="level1">
-<h1>Prepare array for the STAR step, where we need the name to include the “_S#“:</h1>
+<section id="prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-array-for-the-star-step-where-we-need-the-name-to-include-the-_s">Prepare array for the STAR step, where we need the name to include the “_S#“:</h3>
 <p>write.table(ff, “/home/gerard/Array_STAR.txt”, quote = F, sep = ““, row.names = F, col.names = F)</p>
 </section>
-<section id="now-prepare-array-for-the-other-steps-without-the-_s" class="level1">
-<h1>Now, prepare array for the other steps, without the “_S#“:</h1>
+<section id="now-prepare-array-for-the-other-steps-without-the-_s" class="level3">
+<h3 class="anchored" data-anchor-id="now-prepare-array-for-the-other-steps-without-the-_s">Now, prepare array for the other steps, without the “_S#“:</h3>
 <p>ff &lt;- gsub(“_.*“,”“,ff)</p>
-<p>#write.table(ff, “/home/gerard/Array_Others.txt”, quote = F, sep = ““, row.names = F, col.names = F) #######################################################################################################################################################################</p>
+<p>#write.table(ff, “/home/gerard/Array_Others.txt”, quote = F, sep = ““, row.names = F, col.names = F)</p>
 </section>
-<section id="to-set-the-array_star.txt-file-as-array-in-bash" class="level1">
-<h1>To set the Array_STAR.txt file as array in bash:</h1>
-<section id="section-4" class="level167">
-<p class="heading"></p>
-<p>mapfile -t arr &lt; /home/gerard/Array_STAR.txt #######################################################################################################################################################################</p>
+<section id="to-set-the-array_star.txt-file-as-array-in-bash" class="level3">
+<h3 class="anchored" data-anchor-id="to-set-the-array_star.txt-file-as-array-in-bash">To set the Array_STAR.txt file as array in bash:</h3>
+<p>mapfile -t arr &lt; /home/gerard/Array_STAR.txt</p>
 </section>
-</section>
-<section id="we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." class="level1">
-<h1>We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.</h1>
-<section id="section-5" class="level167">
-<p class="heading"></p>
-</section>
-</section>
-<section id="bam-to-fastq-conversion" class="level1">
-<h1>BAM to FASTQ conversion</h1>
+<section id="bam-to-fastq-conversion.-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required." class="level3">
+<h3 class="anchored" data-anchor-id="bam-to-fastq-conversion.-we-receive-fastq-files-from-the-sequencing-company-therefore-the-first-step-in-the-gtex-pipeline-is-not-required.">BAM to FASTQ conversion. We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.</h3>
 <p>for i in *.bam;do sample_id=${i:0:7} docker run –rm -v <span class="math inline">\(path_to_data:/data -t broadinstitute/gtex_rnaseq \
-/bin/bash -c "/src/run_SamToFastq.py /data/\)</span>i -p ${sample_id} -o /data” done #######################################################################################################################################################################</p>
+/bin/bash -c "/src/run_SamToFastq.py /data/\)</span>i -p ${sample_id} -o /data” done</p>
 </section>
-<section id="only-one-time-to-create-the-star-index" class="level1">
-<h1>Only one time, to create the STAR index:</h1>
-<section id="section-6" class="level167">
-<p class="heading"></p>
-</section>
-</section>
-<section id="build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149" class="level1">
-<h1>Build the STAR index, using the gencode version v26, and for reads of length 149:</h1>
+<section id="build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149.-only-one-time-to-create-the-star-index" class="level3">
+<h3 class="anchored" data-anchor-id="build-the-star-index-using-the-gencode-version-v26-and-for-reads-of-length-149.-only-one-time-to-create-the-star-index">Build the STAR index, using the gencode version v26, and for reads of length 149. Only one time, to create the STAR index:</h3>
 <p>mkdir STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149</p>
 <p>docker run –rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10<br>
 /bin/bash -c “STAR<br>
@@ -220,27 +191,19 @@ ul.task-list li input[type="checkbox"] {
 –genomeFastaFiles /data/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta<br>
 –sjdbGTFfile /data/gencode.v26.GRCh38.annotation.ERCC92.gtf<br>
 –sjdbOverhang 149<br>
-–runThreadN 16” #######################################################################################################################################################################</p>
+–runThreadN 16”</p>
 </section>
-<section id="only-one-time-to-create-the-rsem-index" class="level1">
-<h1>Only one time, to create the RSEM index:</h1>
-<section id="section-7" class="level167">
-<p class="heading"></p>
-</section>
-</section>
-<section id="build-the-rsem-index" class="level1">
-<h1>Build the RSEM index:</h1>
+<section id="build-the-rsem-index.-only-one-time-to-create-the-rsem-index" class="level3">
+<h3 class="anchored" data-anchor-id="build-the-rsem-index.-only-one-time-to-create-the-rsem-index">Build the RSEM index. Only one time, to create the RSEM index:</h3>
 <p>docker run –rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10<br>
 /bin/bash -c “rsem-prepare-reference<br>
 /data/GTEx/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta<br>
 /data/GTEx/rsem_reference/rsem_reference<br>
 –gtf /data/GTEx/gencode.v26.GRCh38.annotation.ERCC92.gtf<br>
-–num-threads 16” #######################################################################################################################################################################</p>
+–num-threads 16”</p>
 </section>
-<section id="star-alignment" class="level1">
-<h1>STAR alignment:</h1>
-<section id="section-8" class="level167">
-<p class="heading"></p>
+<section id="star-alignment" class="level3">
+<h3 class="anchored" data-anchor-id="star-alignment">STAR alignment:</h3>
 <p>path_to_data=“/home/gerard/RNAseq”</p>
 <p>for i in “<span class="math inline">\({arr[0]}";do folder=\)</span>{i:0:9} cp -r /home/datasets/aaa/AAA.d.RNAseq/FastQ/${folder} /home/gerard/RNAseq echo Folder ${folder} has been copied! docker run –rm -v <span class="math inline">\(path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
 /bin/bash -c "/src/run_STAR.py \
@@ -249,64 +212,46 @@ ul.task-list li input[type="checkbox"] {
 /data/\)</span>{folder}/${i}_R2_001.fastq.gz<br>
 <span class="math inline">\(folder \
 --threads 28 \
---output_dir /tmp/star_out &amp;&amp; mv /tmp/star_out /data/GTEx/\)</span>{folder}” rm -r /home/gerard/RNAseq/${folder} echo Folder ${folder} has been removed! done #######################################################################################################################################################################</p>
+--output_dir /tmp/star_out &amp;&amp; mv /tmp/star_out /data/GTEx/\)</span>{folder}” rm -r /home/gerard/RNAseq/${folder} echo Folder ${folder} has been removed! done</p>
 </section>
+<section id="to-set-the-array_others.txt-file-as-array-in-bash" class="level3">
+<h3 class="anchored" data-anchor-id="to-set-the-array_others.txt-file-as-array-in-bash">To set the Array_Others.txt file as array in bash:</h3>
+<p>mapfile -t arr &lt; /home/gerard/Array_Others.txt</p>
 </section>
-<section id="to-set-the-array_others.txt-file-as-array-in-bash" class="level1">
-<h1>To set the Array_Others.txt file as array in bash:</h1>
-<section id="section-9" class="level167">
-<p class="heading"></p>
-<p>mapfile -t arr &lt; /home/gerard/Array_Others.txt #######################################################################################################################################################################</p>
-</section>
-</section>
-<section id="after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have" class="level1">
-<h1>After obtaining the SAM aligned files, we run RSeQC with one of them to identify the type of data we have:</h1>
-<section id="section-10" class="level167">
-<p class="heading"></p>
+<section id="after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have" class="level3">
+<h3 class="anchored" data-anchor-id="after-obtaining-the-sam-aligned-files-we-run-rseqc-with-one-of-them-to-identify-the-type-of-data-we-have">After obtaining the SAM aligned files, we run RSeQC with one of them to identify the type of data we have:</h3>
 <p>python3 ./anaconda3/bin/infer_experiment.py -r /home/gerard/RNAseq/GTEx/BED/hg38_RefSeq.bed -i /home/gerard/RNAseq/GTEx/22ID00809/22ID00809.Aligned.sortedByCoord.out.bam</p>
 <p>Output:</p>
 <p>Reading reference gene model /home/gerard/RNAseq/GTEx/BED/hg38_RefSeq.bed … Done Loading SAM/BAM file … Total 200000 usable reads were sampled</p>
 <p>This is PairEnd Data Fraction of reads failed to determine: 0.0185 Fraction of reads explained by “1++,1–,2+-,2-+”: 0.0187 Fraction of reads explained by “1+-,1-+,2++,2–”: 0.9628</p>
 </section>
+<section id="indicates-that-is-paired-end-stranded." class="level3">
+<h3 class="anchored" data-anchor-id="indicates-that-is-paired-end-stranded.">Indicates that is paired-end STRANDED.</h3>
 </section>
-<section id="indicates-that-is-paired-end-stranded." class="level1">
-<h1>Indicates that is paired-end STRANDED.</h1>
-<section id="section-11" class="level167">
-<p class="heading"></p>
-</section>
-</section>
-<section id="sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done" class="level1">
-<h1>Sync BAMs (optional; copy QC flags and read group IDs): NOT DONE</h1>
-<section id="section-12" class="level167">
-<p class="heading"></p>
+<section id="sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done" class="level3">
+<h3 class="anchored" data-anchor-id="sync-bams-optional-copy-qc-flags-and-read-group-ids-not-done">Sync BAMs (optional; copy QC flags and read group IDs): NOT DONE</h3>
 <p>for i in “${arr[@]}”;do docker run –rm -v <span class="math inline">\(path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
 /bin/bash -c "/src/run_bamsync.sh \
 /data/\)</span>input_bam<br>
 /data/<span class="math inline">\({sample_id}/\)</span>{sample_id}.Aligned.sortedByCoord.out.bam<br>
-/data/<span class="math inline">\({sample_id}/\)</span>{sample_id}” done #######################################################################################################################################################################</p>
+/data/<span class="math inline">\({sample_id}/\)</span>{sample_id}” done</p>
 </section>
-</section>
-<section id="mark-duplicates-picard" class="level1">
-<h1>Mark duplicates (Picard):</h1>
-<section id="section-13" class="level167">
-<p class="heading"></p>
+<section id="mark-duplicates-picard" class="level3">
+<h3 class="anchored" data-anchor-id="mark-duplicates-picard">Mark duplicates (Picard):</h3>
 <p>path_to_data=“/home/gerard/RNAseq/GTEx”</p>
 <p>for i in “${arr[@]}”;do docker run –rm -v <span class="math inline">\(path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
 /bin/bash -c "/src/run_MarkDuplicates.py \
 /data/\)</span>{i}/${i}.Aligned.sortedByCoord.out.bam<br>
 <span class="math inline">\({i}.Aligned.sortedByCoord.out.patched.md \
---output_dir /data/\)</span>{i}” done #######################################################################################################################################################################</p>
+--output_dir /data/\)</span>{i}” done</p>
 </section>
+<section id="rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly-with-the-same-options-as-in-the-gtex-pipeline.-the-options-that-increase-the-number-of-exonic-reads-are-rf-and-using-gencode.v26.grch38.ercc.genes.collapsed_only.gtf-as-gencode-reference.-i-start-creating-the-rf-folder-in-each-of-the-samples-folders" class="level3">
+<h3 class="anchored" data-anchor-id="rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly-with-the-same-options-as-in-the-gtex-pipeline.-the-options-that-increase-the-number-of-exonic-reads-are-rf-and-using-gencode.v26.grch38.ercc.genes.collapsed_only.gtf-as-gencode-reference.-i-start-creating-the-rf-folder-in-each-of-the-samples-folders">RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly, with the same options as in the GTEx pipeline. The options that increase the number of exonic reads are: RF and using gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf as gencode reference. I start creating the RF folder in each of the samples folders</h3>
+<p>for i in “<span class="math inline">\({arr[@]}";do mkdir /home/gerard/RNAseq/GTEx/\)</span>{i}/RF rnaseqc gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf /home/gerard/RNAseq/GTEx/<span class="math inline">\({i}/\)</span>{i}.Aligned.sortedByCoord.out.md.bam /home/gerard/RNAseq/GTEx/${i}/RF<br>
+-s ${i} –stranded RF -vv done</p>
 </section>
-<section id="rna-seqc-i-am-not-using-the-python-script-descrbied-in-the-gtex-pipeline-because-it-is-not-detecting-the-.gtf-file-correctly.-i-am-using-the-software-directly" class="level1">
-<h1>RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly,</h1>
-<p>with the same options as in the GTEx pipeline. The options that increase the number of exonic reads are: RF and using gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf as gencode reference. I start creating the RF folder in each of the samples folders: ####################################################################################################################################################################### for i in “<span class="math inline">\({arr[@]}";do mkdir /home/gerard/RNAseq/GTEx/\)</span>{i}/RF rnaseqc gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf /home/gerard/RNAseq/GTEx/<span class="math inline">\({i}/\)</span>{i}.Aligned.sortedByCoord.out.md.bam /home/gerard/RNAseq/GTEx/${i}/RF<br>
--s ${i} –stranded RF -vv done #######################################################################################################################################################################</p>
-</section>
-<section id="rsem-transcript-quantification" class="level1">
-<h1>RSEM transcript quantification:</h1>
-<section id="section-14" class="level167">
-<p class="heading"></p>
+<section id="rsem-transcript-quantification" class="level3">
+<h3 class="anchored" data-anchor-id="rsem-transcript-quantification">RSEM transcript quantification:</h3>
 <p>path_to_data=“/home/gerard/RNAseq”</p>
 <p>for i in “${arr[@]}”;do docker run –rm -v <span class="math inline">\(path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
 /bin/bash -c "/src/run_RSEM.py \
@@ -315,16 +260,16 @@ ul.task-list li input[type="checkbox"] {
 /data/GTEx/\)</span>{i}/<span class="math inline">\({i} \
 --o /data/GTEx/\)</span>{i}<br>
 –is_stranded true<br>
-–threads 24” done #######################################################################################################################################################################</p>
+–threads 24” done</p>
 </section>
-</section>
-<section id="sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py" class="level1">
-<h1>Sample-level outputs in GCT format can be concatenated using combine_GCTs.py:</h1>
+<section id="sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py" class="level3">
+<h3 class="anchored" data-anchor-id="sample-level-outputs-in-gct-format-can-be-concatenated-using-combine_gcts.py">Sample-level outputs in GCT format can be concatenated using combine_GCTs.py:</h3>
 <p>docker run –rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10<br>
 /bin/bash -c “python3 /src/combine_GCTs.py<br>
 ${rnaseqc_tpm_gcts} ${sample_set_id}.rnaseqc_tpm”</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -6,213 +6,165 @@ This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
+## GTEx Pipeline for AAA RNAseq Analysis
 
-#########################################
-# GTEx Pipeline for AAA RNAseq Analysis #
-#########################################
+### Install RNAseQC and samtools, then modify .bashrc file to make them callable from anywhere:
 
-# Install RNAseQC and samtools, then modify .bashrc file to make them callable from anywhere:
-#######################################################################################################################################################################
-mkdir opt
-cd opt
-mkdir rnaseqc
-cd rnadeqc
-wget https://github.com/getzlab/rnaseqc/releases/download/v2.3.6/rnaseqc.v2.3.6.linux.gz
-gunzip rnaseqc.v2.3.6.linux.gz && mv rnaseqc.v2.3.6.linux rnaseqc && chmod 775 rnaseqc
-PATH=$PATH:/home/gerard/opt/rnaseqc
-pip3 install rnaseqc
+mkdir opt cd opt mkdir rnaseqc cd rnadeqc wget https://github.com/getzlab/rnaseqc/releases/download/v2.3.6/rnaseqc.v2.3.6.linux.gz gunzip rnaseqc.v2.3.6.linux.gz && mv rnaseqc.v2.3.6.linux rnaseqc && chmod 775 rnaseqc PATH=\$PATH:/home/gerard/opt/rnaseqc pip3 install rnaseqc
 
-# Add to /home/gerard/.bashrc file:
-export PATH=$PATH:/home/gerard/samtools-1.16.1
-export PATH=$PATH:/home/gerard/opt/rnaseqc
-#######################################################################################################################################################################
+### Add to /home/gerard/.bashrc file:
 
+export PATH=$PATH:/home/gerard/samtools-1.16.1 export PATH=$PATH:/home/gerard/opt/rnaseqc
 
+### In R, create a list with the files that will be used in the pipeline steps:
 
-# In R, create a list with the files that will be used in the pipeline steps:
-#######################################################################################################################################################################
-ff <- list.files(path = "/home/datasets/aaa/AAA.d.RNAseq/FastQ",pattern = "*R1_001.fastq.gz", recursive = "TRUE", full.names = F)
-ff <- gsub(".*/","",ff)
+ff <- list.files(path = "/home/datasets/aaa/AAA.d.RNAseq/FastQ",pattern = "*R1_001.fastq.gz", recursive = "TRUE", full.names = F) 
+ff <- gsub(".*/","",ff) 
 ff <- sub("^([^_]*_[^_]*).*", "\\1", ff)
 
-# Prepare array for the STAR step, where we need the name to include the "_S#":
+### Prepare array for the STAR step, where we need the name to include the "_S#":
+
 write.table(ff, "/home/gerard/Array_STAR.txt", quote = F, sep = "", row.names = F, col.names = F)
 
-# Now, prepare array for the other steps, without the "_S#":
+### Now, prepare array for the other steps, without the "_S#":
+
 ff <- gsub("_.*","",ff)
 
 #write.table(ff, "/home/gerard/Array_Others.txt", quote = F, sep = "", row.names = F, col.names = F)
-#######################################################################################################################################################################
 
+### To set the Array_STAR.txt file as array in bash:
 
-# To set the Array_STAR.txt file as array in bash:
-#######################################################################################################################################################################
 mapfile -t arr < /home/gerard/Array_STAR.txt
-#######################################################################################################################################################################
 
 
-# We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.
-#######################################################################################################################################################################
-# BAM to FASTQ conversion
-for i in *.bam;do
-sample_id=${i:0:7}
+### BAM to FASTQ conversion. We receive FASTQ files from the sequencing company, therefore, the first step in the GTEx pipeline is not required.
+
+for i in *.bam;do 
+sample_id=${i:0:7} 
 docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq \
-    /bin/bash -c "/src/run_SamToFastq.py /data/$i -p ${sample_id} -o /data"
+ /bin/bash -c "/src/run_SamToFastq.py /data/$i -p \${sample_id} -o /data" 
 done
-#######################################################################################################################################################################
 
 
-# Only one time, to create the STAR index:
-#######################################################################################################################################################################
-# Build the STAR index, using the gencode version v26, and for reads of length 149:
+### Build the STAR index, using the gencode version v26, and for reads of length 149. Only one time, to create the STAR index:
 
 mkdir STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149
 
-docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "STAR \
-        --runMode genomeGenerate \
-        --genomeDir /data/STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149 \
-        --genomeFastaFiles /data/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta \
-        --sjdbGTFfile /data/gencode.v26.GRCh38.annotation.ERCC92.gtf \
-        --sjdbOverhang 149 \
-        --runThreadN 16"
-#######################################################################################################################################################################
+docker run --rm -v \$path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
+/bin/bash -c "STAR \
+--runMode genomeGenerate \
+--genomeDir /data/STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149 \
+--genomeFastaFiles /data/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta \
+--sjdbGTFfile /data/gencode.v26.GRCh38.annotation.ERCC92.gtf \
+--sjdbOverhang 149 \
+--runThreadN 16" 
 
 
-# Only one time, to create the RSEM index:
-#######################################################################################################################################################################
-# Build the RSEM index:
-docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "rsem-prepare-reference \
-        /data/GTEx/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta \
-        /data/GTEx/rsem_reference/rsem_reference \
-        --gtf /data/GTEx/gencode.v26.GRCh38.annotation.ERCC92.gtf \
-        --num-threads 16"
-#######################################################################################################################################################################
+### Build the RSEM index. Only one time, to create the RSEM index:
+
+docker run --rm -v \$path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
+/bin/bash -c "rsem-prepare-reference \
+/data/GTEx/Homo_sapiens_assembly38_noALT_noHLA_noDecoy_ERCC.fasta \
+/data/GTEx/rsem_reference/rsem_reference \
+--gtf /data/GTEx/gencode.v26.GRCh38.annotation.ERCC92.gtf \
+--num-threads 16"
 
 
-# STAR alignment:
-#######################################################################################################################################################################
+### STAR alignment:
+
 path_to_data="/home/gerard/RNAseq"
 
-for i in "${arr[0]}";do
-folder=${i:0:9}
-cp -r /home/datasets/aaa/AAA.d.RNAseq/FastQ/${folder} /home/gerard/RNAseq
-echo Folder ${folder} has been copied!
+for i in "${arr[0]}";do 
+folder=${i:0:9} 
+cp -r /home/datasets/aaa/AAA.d.RNAseq/FastQ/\${folder} /home/gerard/RNAseq 
+echo Folder \${folder} has been copied! 
 docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "/src/run_STAR.py \
-        /data/GTEx/STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149 \
-        /data/${folder}/${i}_R1_001.fastq.gz \
-        /data/${folder}/${i}_R2_001.fastq.gz \
-        $folder \
-        --threads 28 \
-        --output_dir /tmp/star_out && mv /tmp/star_out /data/GTEx/${folder}"
-rm -r /home/gerard/RNAseq/${folder}
-echo Folder ${folder} has been removed!
-done
-#######################################################################################################################################################################
+ /bin/bash -c "/src/run_STAR.py \
+ /data/GTEx/STARv275a_genome_GRCh38_noALT_noHLA_noDecoy_v26_oh149 \
+ /data/${folder}/${i}_R1_001.fastq.gz \
+ /data/${folder}/${i}_R2_001.fastq.gz\
+ $folder \
+ --threads 28 \
+ --output_dir /tmp/star_out && mv /tmp/star_out /data/GTEx/${folder}" 
+rm -r /home/gerard/RNAseq/\${folder} 
+echo Folder \${folder} has been removed! 
+done 
 
 
+### To set the Array_Others.txt file as array in bash:
 
-# To set the Array_Others.txt file as array in bash:
-#######################################################################################################################################################################
 mapfile -t arr < /home/gerard/Array_Others.txt
-#######################################################################################################################################################################
 
 
+### After obtaining the SAM aligned files, we run RSeQC with one of them to identify the type of data we have:
 
-# After obtaining the SAM aligned files, we run RSeQC with one of them to identify the type of data we have:
-#######################################################################################################################################################################
 python3 ./anaconda3/bin/infer_experiment.py -r /home/gerard/RNAseq/GTEx/BED/hg38_RefSeq.bed -i /home/gerard/RNAseq/GTEx/22ID00809/22ID00809.Aligned.sortedByCoord.out.bam
 
 Output:
 
-Reading reference gene model /home/gerard/RNAseq/GTEx/BED/hg38_RefSeq.bed ... Done
-Loading SAM/BAM file ...  Total 200000 usable reads were sampled
+Reading reference gene model /home/gerard/RNAseq/GTEx/BED/hg38_RefSeq.bed ... Done Loading SAM/BAM file ... Total 200000 usable reads were sampled
+
+This is PairEnd Data Fraction of reads failed to determine: 0.0185 Fraction of reads explained by "1++,1--,2+-,2-+": 0.0187 Fraction of reads explained by "1+-,1-+,2++,2--": 0.9628
+
+### Indicates that is paired-end STRANDED.
 
 
-This is PairEnd Data
-Fraction of reads failed to determine: 0.0185
-Fraction of reads explained by "1++,1--,2+-,2-+": 0.0187
-Fraction of reads explained by "1+-,1-+,2++,2--": 0.9628
+### Sync BAMs (optional; copy QC flags and read group IDs): NOT DONE
 
-# Indicates that is paired-end STRANDED.
-#######################################################################################################################################################################
-
-
-# Sync BAMs (optional; copy QC flags and read group IDs): NOT DONE
-#######################################################################################################################################################################
-for i in "${arr[@]}";do
-docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "/src/run_bamsync.sh \
-        /data/$input_bam \
-        /data/${sample_id}/${sample_id}.Aligned.sortedByCoord.out.bam \
-        /data/${sample_id}/${sample_id}"
+for i in "\${arr[@]}";do docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
+ /bin/bash -c "/src/run_bamsync.sh \
+ /data/$input_bam \
+/data/${sample_id}/${sample_id}.Aligned.sortedByCoord.out.bam \
+/data/${sample_id}/${sample_id}" 
 done
-#######################################################################################################################################################################
 
 
-# Mark duplicates (Picard):
-#######################################################################################################################################################################
+### Mark duplicates (Picard):
+
 path_to_data="/home/gerard/RNAseq/GTEx"
 
-for i in "${arr[@]}";do
+for i in "\${arr[@]}";do 
 docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "/src/run_MarkDuplicates.py \
-    	/data/${i}/${i}.Aligned.sortedByCoord.out.bam \
-    	${i}.Aligned.sortedByCoord.out.patched.md \
-        --output_dir /data/${i}"
+ /bin/bash -c "/src/run_MarkDuplicates.py \
+ /data/${i}/${i}.Aligned.sortedByCoord.out.bam \
+ ${i}.Aligned.sortedByCoord.out.patched.md \
+ --output_dir /data/${i}" 
 done
-#######################################################################################################################################################################
 
 
-# RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly,
-with the same options as in the GTEx pipeline. The options that increase the number of exonic reads are: RF and using gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf 
-as gencode reference. I start creating the RF folder in each of the samples folders:
-#######################################################################################################################################################################
-for i in "${arr[@]}";do
-mkdir /home/gerard/RNAseq/GTEx/${i}/RF
-rnaseqc gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf /home/gerard/RNAseq/GTEx/${i}/${i}.Aligned.sortedByCoord.out.md.bam /home/gerard/RNAseq/GTEx/${i}/RF \
-    -s ${i} --stranded RF -vv
+### RNA-SeQC: I am not using the python script descrbied in the GTEx pipeline because it is not detecting the .gtf file correctly. I am using the software directly, with the same options as in the GTEx pipeline. The options that increase the number of exonic reads are: RF and using gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf as gencode reference. I start creating the RF folder in each of the samples folders
+
+for i in "${arr[@]}";do 
+mkdir /home/gerard/RNAseq/GTEx/${i}/RF rnaseqc gencode.v26.GRCh38.ERCC.genes.collapsed_only.gtf /home/gerard/RNAseq/GTEx/${i}/${i}.Aligned.sortedByCoord.out.md.bam /home/gerard/RNAseq/GTEx/${i}/RF\
+-s \${i} --stranded RF -vv 
 done
-#######################################################################################################################################################################
 
 
-# RSEM transcript quantification:
-#######################################################################################################################################################################
+### RSEM transcript quantification:
+
 path_to_data="/home/gerard/RNAseq"
 
-for i in "${arr[@]}";do
+for i in "\${arr[@]}";do 
 docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "/src/run_RSEM.py \
-        /data/GTEx/rsem_reference \
-        /data/GTEx/${i}/${i}.Aligned.toTranscriptome.out.bam \
-        /data/GTEx/${i}/${i} \
-        --o /data/GTEx/${i} \
-	--is_stranded true \
-	--threads 24"
+ /bin/bash -c "/src/run_RSEM.py \
+  /data/GTEx/rsem_reference \
+  /data/GTEx/${i}/${i}.Aligned.toTranscriptome.out.bam \
+  /data/GTEx/${i}/${i} \
+  --o /data/GTEx/${i} \
+  --is_stranded true \
+  --threads 24" 
 done
-#######################################################################################################################################################################
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Sample-level outputs in GCT format can be concatenated using combine_GCTs.py:
-
+### Sample-level outputs in GCT format can be concatenated using combine_GCTs.py:
 
 docker run --rm -v $path_to_data:/data -t broadinstitute/gtex_rnaseq:V10 \
-    /bin/bash -c "python3 /src/combine_GCTs.py \
-        ${rnaseqc_tpm_gcts} ${sample_set_id}.rnaseqc_tpm"
+  /bin/bash -c "python3 /src/combine_GCTs.py \
+    ${rnaseqc_tpm_gcts} \${sample_set_id}.rnaseqc_tpm"
+
+
+
+
+
+
 
